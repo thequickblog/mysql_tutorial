@@ -1,0 +1,125 @@
+
+
+USE thequickblog_;
+
+CREATE TABLE department (
+    id INT  PRIMARY KEY,
+    name VARCHAR(100) ,
+    manager_id INT )
+;
+
+
+INSERT INTO department (id,name, manager_id) VALUES
+(1,'Engineering', 1),
+(2,'Finance', 2),
+(3,'Human Resource', 3),
+(4,'Marketing', 4);
+
+
+CREATE TABLE employee (
+    id INT  PRIMARY KEY,
+    name VARCHAR(100) ,
+    dob DATE,
+    address VARCHAR(255),
+    department_id INT,
+    join_date DATE ,
+    position VARCHAR(100)
+);
+
+INSERT INTO employee (id, name, dob, address, department_id, join_date, position) VALUES
+(1, 'Suresh Sharma', '1998-01-15', '123 Durbar Marg, Kathmandu', 1, '2020-03-01', 'IT Manager'),
+(2, 'Asha Thapa', '1995-06-25', '456 Putalisadak, Kathmandu', 2, '2019-07-15', 'Software Developer'),
+(3, 'Ramesh Koirala', '1997-09-30', '789 New Road, Kathmandu', 1, '2018-11-20', 'Business Analyst'),
+(4, 'Nirjala Shrestha', '1996-11-12', '321 Lazimpat, Kathmandu', 3, '2021-04-10', 'UX/UI Designer'),
+(5, 'Manish Joshi', '1994-05-20', '654 Baneshwor, Kathmandu', 2, '2017-09-05', 'Software Developer'),
+(6, 'Sarita Rai', '1999-08-14', '987 Kalanki, Kathmandu', 4, '2022-01-25', 'Quality Assurance Tester'),
+(7, 'Dipesh Gurung', '1996-12-05', '159 Jawalakhel, Lalitpur', 3, '2020-10-18', 'Systems Architect'),
+(8, 'Laxmi Tamang', '1997-03-22', '753 Kupondole, Lalitpur', 1, '2019-06-30', 'Data Analyst'),
+(9, 'Prakash Adhikari', '1995-07-11', '852 Satdobato, Lalitpur', 4, '2018-02-14', 'Technical Support Specialist'),
+(10, 'Sangita Maharjan', '1998-10-28', '951 Pulchowk, Lalitpur', 3, '2021-08-05', 'Graphic Designer');
+
+
+
+
+CREATE TABLE project (
+    id INT  PRIMARY KEY,
+    name VARCHAR(100) ,
+    budget INT,
+    date_initialize DATE,
+    deadline DATE 
+);
+
+
+INSERT INTO project (id, name, budget, date_initialize, deadline) VALUES
+(1, 'thequickblog website : web development', 5000, '2023-01-01', '2023-06-01'),
+(2, 'fire fire game : video game', 8000, '2023-02-15', NULL),
+(3, 'digital piggy : digital wallet', 3000, '2023-03-01', NULL),
+(4, 'medi kit : health tips', 12000, '2023-04-01', NULL),
+(5, 'digi wardrobe : ecommerce', 7000, '2023-05-15', '2023-10-15'),
+(6, 'connect to : social platform', 9000, '2023-06-01', NULL),
+(7, 'chat ai : AI bot', 15000, '2023-07-15', '2024-01-15'),
+(8, 'everything : digital encyclopedia', 10000, '2023-08-01', '2023-12-15');
+
+
+
+
+CREATE TABLE allocation (
+    project_id INT,
+    employee_id INT,
+    enroll_date DATE,
+    exit_date DATE,
+    PRIMARY KEY (project_id, employee_id),
+    FOREIGN KEY (project_id) REFERENCES project(id),
+    FOREIGN KEY (employee_id) REFERENCES employee(id)
+   );
+
+
+
+INSERT INTO allocation (project_id, employee_id, enroll_date, exit_date) VALUES
+(1, 2, '2023-01-01', '2023-06-01'),
+(1, 3, '2023-01-01', '2023-06-01'),
+(2, 5, '2023-02-15', NULL),
+(2, 6, '2023-02-15', NULL),
+(3, 7, '2023-03-01', NULL),
+(3, 8, '2023-03-01', NULL),
+(4, 1, '2023-04-01', NULL),
+(5, 4, '2023-05-15', '2023-10-15'),
+(6, 9, '2023-06-01', NULL),
+(7, 10, '2023-07-15', '2024-01-15');
+
+
+
+
+
+SELECT p.name AS project_name, e.name AS employee_name
+FROM project p
+INNER JOIN allocation a ON p.id = a.project_id
+INNER JOIN employee e ON a.employee_id = e.id;
+
+
+
+
+
+
+SELECT p.name AS project_name, e.name AS employee_name
+FROM project p
+LEFT JOIN allocation a ON p.id = a.project_id
+LEFT JOIN employee e ON a.employee_id = e.id;
+
+
+
+
+
+
+
+SELECT p.name AS project_name, e.name AS employee_name
+FROM allocation a
+RIGHT JOIN project p ON a.project_id = p.id
+LEFT JOIN employee e ON a.employee_id = e.id;
+
+
+
+SELECT p.name AS project_name, e.name AS employee_name
+FROM project p 
+JOIN employee e;
+
