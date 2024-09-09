@@ -1,0 +1,7 @@
+SELECT name
+FROM department d
+WHERE EXISTS (
+    SELECT name
+    FROM employee e
+    WHERE e.department_id = d.id
+);
