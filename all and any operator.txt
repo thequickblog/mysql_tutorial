@@ -1,0 +1,24 @@
+// All operator
+select all name from employee where department_id=1;
+
+//all operator (subquery)
+
+SELECT name
+FROM employee
+WHERE department_id = All
+  (SELECT id
+  FROM department
+  WHERE manager_id=1);
+  
+-------------------------------------------------------------------------- 
+
+
+
+
+//Any operator
+SELECT name
+FROM employee
+WHERE department_id = ANY
+  (SELECT id
+  FROM department
+  WHERE id<2);
