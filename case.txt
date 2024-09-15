@@ -1,0 +1,35 @@
+
+
+
+SYNTAX :
+
+
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+
+
+
+    ELSE result
+END;
+
+
+-------------------------------------------
+
+
+QUERY:
+
+
+SELECT id , name ,
+CASE
+    WHEN department_id=1 THEN 'Working in Engineering Department'
+    WHEN department_id=2 THEN 'Working in Finance Department'
+    WHEN department_id=2 THEN 'Working in Human Resource Department'
+    WHEN department_id=2 THEN 'Working in Marketing Department'
+    ELSE 'Administration'
+END AS identification
+FROM employee;
+
+
+
