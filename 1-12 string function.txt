@@ -1,0 +1,12 @@
+select concat('hello' ,'world');
+select length ('hello');
+select bit_length('hello');
+select upper('hello');
+select lower('HELLO');
+select substring('12345678910',2,5);
+select instr('hello world','world');
+select locate('world','hello world');
+select replace ('hello world','world','Mysql');
+select trim('           hello               ');
+select left('hello world',9);
+select right('hello worldajkdhaudhalk',5);
