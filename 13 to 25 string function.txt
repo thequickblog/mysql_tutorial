@@ -1,0 +1,13 @@
+select format(123456789.67,2);
+select to_base64('Hello World');
+select from_base64('SGVsbG8gV29ybGQ=');
+select hex('abc');
+select unhex('616263');
+select conv('a',16,2);
+select ascii('c');
+select ord('hello');
+select bin(5);
+select quote('It is ///// a "video"');
+select char(97,98,99);
+select export_set(5,'n','y',',',4);
+select weight_string('abc');
